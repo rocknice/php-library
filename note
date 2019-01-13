@@ -10,7 +10,7 @@
 10、渲染结果返回给响应组件。
 11、响应组件发送渲染结果给用户浏览器。
 
-如何创建一个php页面
+一、如何创建一个php页面
 
 1、先创建动作，声明在控制器中：SiteController.php，Yii 使用 action 前缀区分普通方法和操作。 
 注：action 前缀后面的名称被映射为操作的 ID。在操作方法中，render() 被用来渲染一个 名为 say 的视图文件。结果会被应用接收并显示给最终用户的浏览器（作为整页 HTML 的一部分）
@@ -19,4 +19,31 @@
 注：当一个操作中调用了 render() 方法时， 它将会按 views/控制器 ID/视图名.php 路径加载 PHP 文件。如果你省略 URL 中的 message 参数，将会看到页面只显示 “Hello”。 这是因为 message 被作为一个参数传给 actionSay() 方法，当省略它时，参数将使用默认的 “Hello” 代替。
 URL 中的参数 r 需要更多解释。 它代表路由，是整个应用级的， 指向特定操作的独立 ID。路由格式是 控制器 ID/操作 ID。应用接受请求的时候会检查参数， 使用控制器 ID 去确定哪个控制器应该被用来处理请求。 然后相应控制器将使用操作 ID 去确定哪个操作方法将被用来做具体工作。 上述例子中，路由 site/say 将被解析至 SiteController 控制器和其中的 say 操作。 因此 SiteController::actionSay() 方法将被调用处理请求。
 
-3、使用form表单
+二、如何使用form表单
+
+1、创建模型（创建model）
+步骤：
+1）模型类 EntryForm 代表从用户那请求的数据， 该类如下所示并存储在 models/EntryForm.php 文件中。
+2）EntryForm 类包含 name 和 email 两个公共成员， 用来储存用户输入的数据。它还包含一个名为 rules() 的方法， 用来返回数据验证规则的集合。上面声明的验证规则表示：
+name 和 email 值都是必须的
+email 的值必须满足email规则验证
+3）
+
+2、创建动作（创建controller）
+步骤：
+1）在 site 控制器中创建一个 entry 操作用于新建的模型。 
+
+3、创建视图
+步骤：
+1）最后创建两个视图文件 entry-confirm 和 entry。 他们会被刚才创建的 entry 操作渲染。
+说明：
+entry-confirm 视图简单地显示提交的 name 和 email 数据。视图文件应该保存在 views/site/entry-confirm.php。
+entry 视图显示一个 HTML 表单。视图文件应该保存在 views/site/entry.php。
+2）关于验证：
+你可能会好奇 HTML 表单暗地里是如何工作的呢， 看起来它可以为每个输入框显示文字标签， 而当你没输入正确的信息时又不需要刷新页面就能给出错误提示，似乎有些神奇。
+
+是的，其实数据首先由客户端 JavaScript 脚本验证，然后才会提交给服务器通过 PHP 验证。 yii\widgets\ActiveForm 足够智能到把你在 EntryForm 模型中声明的验证规则转化成客户端 JavaScript 脚本去执行验证。 如果用户浏览器禁用了 JavaScript， 服务器端仍然会像 actionEntry() 方法里这样验证一遍数据。这保证了任何情况下用户提交的数据都是有效的。
+
+输入框的文字标签是 field() 方法生成的，内容就是模型中该数据的属性名。 例如模型中的 name 属性生成的标签就是 Name。
+
+4、使用数据库

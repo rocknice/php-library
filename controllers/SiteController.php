@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\EntryForm;
 
 class SiteController extends Controller
 {
@@ -64,11 +65,28 @@ class SiteController extends Controller
         return $this->render('index');
     }
     /**
-    新建hello页面
+    * 新建hello页面
     */
     public function actionSay($message = 'Hello')
     {
         return $this->render('say', ['message' => $message]);
+    }
+    /**
+    * 新建表单页面
+    */
+    public function actionEntry()
+    {
+        $model = new EntryForm;
+        // 该操作首先创建了一个 EntryForm 对象。然后尝试从 $_POST 搜集用户提交的数据， 由 Yii 的 yii\web\Request::post() 方法负责搜集。 如果模型被成功填充数据（也就是说用户已经提交了 HTML 表单）， 操作将调用 validate() 去确保用户提交的是有效数据。
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // 验证 $model 收到的数据
+            // 做些有意义的事 ...
+            // 表达式 Yii::$app 代表应用实例，它是一个全局可访问的单例。 同时它也是一个服务定位器， 能提供 request，response，db 等等特定功能的组件。 在上面的代码里就是使用 request 组件来访问应用实例收到的 $_POST 数据。
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            // 无论是初始化显示还是数据验证错误
+            return $this->render('entry', ['model' => $model]);
+        }
     }
     /**
      * Login action.
