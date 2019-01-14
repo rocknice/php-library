@@ -7,6 +7,7 @@ use yii\helpers\Html;
 // use common\helps\Helps;
 // use common\helps\ArrayHelper;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
 // use app\models\User;
 use yii\widgets\ActiveForm;
 //use yii\bootstrap\ActiveForm;
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
     <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">图书管理</h3>
+              <h3 class="box-title">图书管理平台</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">   
@@ -37,13 +38,24 @@ use yii\widgets\ActiveForm;
                             // 使用的是模型的列的数据
                             'id',
                             'name',
+                            'phone',
                             // 更复杂的列数据
                             [
-                                'class' => 'yii\grid\DataColumn', //由于是默认类型，可以省略 
-                                'value' => function ($data) {
-                                    return $data->name; // 如果是数组数据则为 $data['name'] ，例如，使用 SqlDataProvider 的情形。
-                                },
-                            ],
+                                'class' => ActionColumn::className(),
+                                'header' => '操作',
+                                'headerOptions' => ['width' => '250'],
+                                'template'=>'{get} {yes} {no} {update} {delete}',
+                                'buttons' => [
+                                    'update' => function ($url, $model, $key) {
+                                        $str = '';
+                                        $str = Html::a('<button type="button" class="btn btn-primary">编辑</button>', Url::to(['library/edit','id'=>$model->id]));
+                                        return $str;
+                                    },
+                                    'delete' => function ($url, $model, $key) {
+                                        return "<a href='javascript:;' class='btn btn-danger _delete' data-url='".Yii::$app->urlManager->createUrl(['/library/delete_js','id'=>$model->id])."'>删除</a>";
+                                    },
+                                ],
+                            ],  
                         ],
                      ]);
                     ?>
@@ -53,6 +65,7 @@ use yii\widgets\ActiveForm;
 <?php     //ActiveForm::end();   ?>    
 <style>
     .select_bg{ background:BCC8D0;  }
+    .table > tbody > tr > td{vertical-align: middle;}
 </style>
 <script>
      $("input[name='selection[]']").addClass("_check");
