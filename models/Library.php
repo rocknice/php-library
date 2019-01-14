@@ -17,12 +17,13 @@ class Library extends\yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => '名字',
-            'phone' => '借书人电话',
-            // 'nickname' => '员工名',
-            // 'astart' => '上班签到',
-            // 'thresholdon' => '上班签到',
+            'id' => 'ISBN',
+            'book' => '书名',
+            'auther' => '作者',
+            'type' => '分类',
+            'price' => '价格',
+            'publish' => '出版社',
+            'date' => '出版时间',
             // 'aend' => '下班打卡',
             // 'thresholdoff' => '上班签到',   
             // 'time' => '统计',

@@ -37,8 +37,12 @@ use yii\widgets\ActiveForm;
                             // 数据提供者中所含数据所定义的简单的列
                             // 使用的是模型的列的数据
                             'id',
-                            'name',
-                            'phone',
+                            'book',
+                            'auther',
+                            'type',
+                            'price',
+                            'publish',
+                            'date',
                             // 更复杂的列数据
                             [
                                 'class' => ActionColumn::className(),

@@ -11,7 +11,7 @@ class LibrarySearch extends Library
     {
         // 只有在 rules() 函数中声明的字段才可以搜索,不声明不显示搜索框
         return [
-           ['id', 'name', 'phone'],
+           ['id', 'book', 'auther','type','price','publish','date'],
         ];
     }
 
@@ -41,8 +41,12 @@ class LibrarySearch extends Library
         }
         // 增加过滤条件来调整查询对象
         $query->andFilterWhere(['=', 'id', $this->id])
-              ->andFilterWhere(['=', 'name', $this->name])
-              ->andFilterWhere(['=', 'phone', $this->phone]);
+              ->andFilterWhere(['=', 'book', $this->book])
+              ->andFilterWhere(['=', 'auther', $this->auther])
+              ->andFilterWhere(['=', 'type', $this->type])
+              ->andFilterWhere(['=', 'price', $this->price])
+              ->andFilterWhere(['=', 'publish', $this->publish])
+              ->andFilterWhere(['=', 'date', $this->date]);
 
         return $dataProvider;
     }

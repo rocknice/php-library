@@ -112,3 +112,21 @@ Yii 定义了一组固定ID和默认配置的 核心 组件， 例如 request �
 2、如何使用js脚本将view和model和数据库联系起来。
 3、如何操作数据。
 4、前端发起请求成功后，如何返回给前端数据，让前端判断
+
+CREATE TABLE `library` (
+  `id` CHAR(10) NOT NULL PRIMARY KEY,
+  `book` CHAR(52) NOT NULL DEFAULT '0',
+  `auther` CHAR(50) NOT NULL DEFAULT '0',
+  `type` CHAR(50) NOT NULL DEFAULT '0',
+  `price` CHAR(50) NOT NULL DEFAULT '0',
+  `publish` CHAR(50) NOT NULL DEFAULT '0',
+  `date` CHAR(50) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `library` VALUES ('7443249','黄金时代','王小波','20.00','北京十月文艺出版社','2018-10');
+INSERT INTO `library` VALUES ('3849372','月亮与六便士','毛姆','20.00','人民出版社','2018-10');
+INSERT INTO `library` VALUES ('3847592','C语言程序设计','谭浩强','20.00','清华大学出版社','2018-10');
+INSERT INTO `library` VALUES ('3920384','三国演义','罗贯中','20.00','人民文学出版社','2018-10');
+INSERT INTO `library` VALUES ('1264637','三体','刘慈欣','20.00','电子音像出版社','2018-10');
+INSERT INTO `library` VALUES ('3217889','流浪地球','刘慈欣','20.00','电子音像出版社','2018-10');
+INSERT INTO `library` VALUES ('2309847','人生的智慧','叔本华','20.00','人民文学出版社','2018-10');
