@@ -8,7 +8,7 @@ use app\models\LibrarySearch;
 use yii\data\Pagination;
 // use common\helps\ArrayHelper;
 // use app\models\User;
-// use yii\helpers\Json;
+use yii\helpers\Json;
 
 
 class LibraryController extends Controller
@@ -34,18 +34,18 @@ class LibraryController extends Controller
     //     $model->delete();
     //     return $this->redirect(['library/index']);
     // }
-    // /*
-    //  * 操作js使用的单个删除
-    //  */
-    // public function actionDelete_js($id){
-    //     try{
-    //         $model = Library::findOne($id);        
-    //         $model->delete();
-    //         echo Json::encode(['done'=>true]);
-    //     } catch (Exception $e) {
-    //         echo Json::encode(['done'=>false,'error'=>$e->getMessage()]);
-    //     }
-    // }
+    /*
+     * 操作js使用的单个删除
+     */
+    public function actionDelete_js($id){
+        try{
+            $model = Library::findOne($id);        
+            $model->delete();
+            return Json::encode(['done'=>true]);
+        } catch (Exception $e) {
+            return Json::encode(['done'=>false,'error'=>$e->getMessage()]);
+        }
+    }
     // /*
     //  * 多选删除js
     //  */

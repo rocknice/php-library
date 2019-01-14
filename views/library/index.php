@@ -52,10 +52,10 @@ use yii\widgets\ActiveForm;
                                         return $str;
                                     },
                                     'delete' => function ($url, $model, $key) {
-                                        return "<a href='javascript:;' class='btn btn-danger _delete' data-url='".Yii::$app->urlManager->createUrl(['/library/delete_js','id'=>$model->id])."'>删除</a>";
+                                        return "<a href='javascript:;' class='btn btn-danger delete' data-url='".Yii::$app->urlManager->createUrl(['/library/delete_js','id'=>$model->id])."'>删除</a>";
                                     },
                                 ],
-                            ],  
+                            ], 
                         ],
                      ]);
                     ?>
@@ -68,11 +68,11 @@ use yii\widgets\ActiveForm;
     .table > tbody > tr > td{vertical-align: middle;}
 </style>
 <script>
-     $("input[name='selection[]']").addClass("_check");
+     $("input[name='selection[]']").addClass("check");
      //选中改变颜色
-     $("._check").click(function(){
+     $(".check").click(function(){
          var id=$(this).val();
-         console.log(id);
+        //  console.log(id);
          if($("#tr-"+id).hasClass("select_bg")){
             $("#tr-"+id).removeClass("select_bg");    
          }else{
@@ -80,19 +80,18 @@ use yii\widgets\ActiveForm;
             $("#tr-"+id).addClass("select_bg");
          }   
      });
-     $("._delete").click(function(){
+     $(".delete").click(function(){
          var url=$(this).attr('data-url');
-         console.log(url);
          $.getJSON(url,{},function(d){
             if(d.done==true){
-                alert('删除成功');
                 window.location.href="<?=Url::to(['library/index'])?>";
+                alert('删除成功');
             }else{
                 alert(d.error);
             } 
          });
     });
-    $("._delete_all").click(function(){
+    $(".delete_all").click(function(){
         var many_check=$("input[name='selection[]']:checked");
         var ids="";
         $(many_check).each(function(){
@@ -108,7 +107,6 @@ use yii\widgets\ActiveForm;
         $.post(url,{ids},function(d){
             console.log(d);
             if(d.done==true){
-                console.log(1);
                 alert('删除成功！');
                 window.location.href="<?=Url::to(['library/index'])?>";
             }else{
