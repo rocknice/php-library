@@ -28,24 +28,24 @@ class LibraryController extends Controller
     /*
      * 操作链接使用的单个删除
      */
-    // public function actionDelete(){
-    //     $id=Yii::$app->request->get('id');
-    //     $model = Library::findOne($id);        
-    //     $model->delete();
-    //     return $this->redirect(['library/index']);
-    // }
+    public function actionDelete(){
+        $id=Yii::$app->request->get('id');
+        $model = Library::findOne($id);        
+        $model->delete();
+        return $this->redirect(['library/index']);
+    }
     /*
      * 操作js使用的单个删除
      */
-    public function actionDelete_js($id){
-        try{
-            $model = Library::findOne($id);        
-            $model->delete();
-            return Json::encode(['done'=>true]);
-        } catch (Exception $e) {
-            return Json::encode(['done'=>false,'error'=>$e->getMessage()]);
-        }
-    }
+    // public function actionDelete_js($id){
+    //     try{
+    //         $model = Library::findOne($id);        
+    //         $model->delete();
+    //         return Json::encode(['done'=>true]);
+    //     } catch (Exception $e) {
+    //         return Json::encode(['done'=>false,'error'=>$e->getMessage()]);
+    //     }
+    // }
     // /*
     //  * 多选删除js
     //  */

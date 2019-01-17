@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
+use app\models\Library;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
@@ -63,6 +65,51 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+    public function actionLibrary()
+    {
+        $query = Library::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $books = $query->orderBy('id')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('library', [
+            'books' => $books,
+            'pagination' => $pagination,
+        ]);
+        // $getBooks = new Library();
+        // $dataProvider = $getBooks->getData(Yii::$app->request->get());
+        // // $sign=Yii::$app->request->get('sign');
+        // return $this->render('library',
+        // [
+        //     "dataProvider"=>$dataProvider,
+        //     // "searchModel"=>$searchModel,
+        //     // "sign"=>$sign,
+        // ]);
+        // return $this->render('library');
+    }
+    public function actionSearch()
+    {
+        // if($model) {
+        //     $book=$_POST['book'];
+        //     $auther=$_POST['auther'];
+        // }
+        // $model->load(Yii::$app->request->post());
+        if($model) {
+            $id=Yii::$app->request->post('id');
+            $model = Library::findOne($id);        
+            $model->delete();
+            
+        }
+        // return $this->render('search');
+        return $this->redirect(['site/index']);
     }
     /**
     * 新建hello页面
