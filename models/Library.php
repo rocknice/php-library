@@ -6,16 +6,16 @@ use yii\db\ActiveRecord;
 
 class Library extends ActiveRecord
 {
-    public $book;
-    public $auther;
+    // public $book;
+    // public $auther;
 
-    public function rules()
-    {
-        return [
-            [['book', 'auther'], 'required'],
-            // ['auther', 'email'],
-        ];
-    }
+    // public function rules()
+    // {
+    //     return [
+    //         [['book', 'auther'], 'required'],
+    //         // ['auther', 'email'],
+    //     ];
+    // }
 }   
     // public static function tableName()
     // {
