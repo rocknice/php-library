@@ -38,8 +38,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => '首页', 'url' => ['/site/index']],
-            ['label' => '图书管理', 'url' => ['/site/library']],
+            // ['label' => '首页', 'url' => ['/site/index']],
+            ['label' => '图书管理系统', 'url' => ['/books/index']],
             ['label' => '关于', 'url' => ['/site/about']],
             ['label' => '联系方式', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
